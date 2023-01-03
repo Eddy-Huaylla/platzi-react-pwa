@@ -3,8 +3,10 @@ import { BrowserRouter, Link } from "react-router-dom"
 import './App.css'
 import { Routes } from './Routes'
 
+import ReactGA from 'react-ga'
 
-export default class App extends React.Component {
+class App extends React.Component {
+
   render() {
     return (
       <BrowserRouter>
@@ -21,3 +23,12 @@ export default class App extends React.Component {
     );
   }
 }
+
+const WrappedComponent = props => {
+  ReactGA.initialize( 'UA-000000-01' )
+  ReactGA.pageview( window.location.pathname + window.location.search )
+
+  return <App {...props} />
+}
+
+export default WrappedComponent
